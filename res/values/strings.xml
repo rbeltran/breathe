@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Breathe</string>
+    <string name="menu_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_basic_courtesy">Basic Courtesy</string>
+   		<string name="button_good_morning">Good Morning</string>
+        <string name="button_good_afternoon">Good Afternoon</string>
+        <string name="button_good_evening">Good Evening</string>
+        <string name="button_excuse_me">Excuse Me</string>
+        <string name="button_good_day">Have a good day</string>
+        <string name="button_please">Please</string>
+        <string name="button_thank_you">Thank You</string>
+        <string name="button_im_sorry">I\'m sorry</string>
+        <string name="button_thank_patience">Thank you for your patience</string>
+    <string name="button_introduction">Introduction</string>
+    <string name="button_assessment">Assessment</string>
+    <string name="button_orders_phrases">Orders/Phrases</string>
+    <string name="button_ventilator_events">Ventilator Events</string>
+    <string name="button_weaning_parameters">Weaning Parameters/CPAP Trial</string>
+    <string name="button_motivation_cpap">Motivation for CPAP Trial</string>
+    <string name="button_arterial_blood">Arterial Blood Gases</string>
+    <string name="button_extubation">Extubation</string>
+    <string name="button_incentive_spirometry">Incentive Spirometry</string>
+    <string name="button_mdi_nebulizer">MDI or Nebulizer</string>
+    <string name="button_chest_physiotherapy">Chest Physiotherapy</string>
+    <string name="button_the_body">Anatomy</string>
+    <string name="button_diseases_conditions">Diseases and Conditions</string>
+    <string name="button_time_days">Time and Days</string>
+    <string name="button_numbers">Numbers</string>
+</resources>
