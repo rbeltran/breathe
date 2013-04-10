@@ -1,6 +1,8 @@
 package com.jphat.Breathe;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,11 +13,15 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
 	OnAudioFocusChangeListener afChangeListener = null;
 	MediaPlayer mPlayer;
+	
+	List<Button> basicCourtesyButtons;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -26,6 +32,21 @@ public class MainActivity extends Activity {
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		mPlayer = new MediaPlayer();
 
+		basicCourtesyButtons = new ArrayList<Button>();
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_morning));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_afternoon));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_evening));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_im_sorry));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_excuse_me));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_thank_you));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_thank_patience));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_please));
+		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_day));
+		
+		for(Button button: basicCourtesyButtons ) {
+			button.setVisibility(View.INVISIBLE);
+		}
+		
 //		afChangeListener = new OnAudioFocusChangeListener() {
 //		    public void onAudioFocusChange(int focusChange) {
 //		        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ) {
@@ -59,7 +80,17 @@ public class MainActivity extends Activity {
 	}
 	
 	public void toggleBasicCourtesy( View view ) {
-		
+		Button goodMorningButton = (Button)findViewById(R.id.button_good_morning);
+		boolean buttonsVisible = goodMorningButton.getVisibility() == View.VISIBLE;
+
+				for( Button bcButton: basicCourtesyButtons ) {
+			if( buttonsVisible ) {
+				bcButton.setVisibility( View.INVISIBLE );
+			} else {
+				bcButton.setVisibility( View.VISIBLE );
+			}
+		}
+			
 	}
 
 	public void playGoodMorning( View view ) {

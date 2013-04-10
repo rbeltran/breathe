@@ -6,55 +6,65 @@
 	android:orientation="vertical" >
 
     <Button
+        android:id="@+id/button_basic_courtesy"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="@string/button_basic_courtesy" 
         android:onClick="toggleBasicCourtesy"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_good_morning"
-        android:onClick="playGoodMorning"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_good_afternoon"
-        android:onClick="playGoodAfternoon"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_good_evening"
-        android:onClick="playGoodEvening"/>
-  	    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_excuse_me"
-        android:onClick="playExcuseMe"/>
-   <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_good_day"
-        android:onClick="playHaveAGoodDay"/>
-   <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_please"
-        android:onClick="playPlease"/>
-   <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_thank_you"
-        android:onClick="playThankYou"/>
-   <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_im_sorry"
-        android:onClick="playImSorry"/>
-   <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/button_thank_patience"
-        android:onClick="playThankPatience"/>	   	    
+    	<Button
+    	    android:id="@+id/button_good_morning"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_good_morning"
+	        android:onClick="playGoodMorning" />
+	    <Button
+    	    android:id="@+id/button_good_afternoon"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_good_afternoon"
+	        android:onClick="playGoodAfternoon"/>
+	    <Button
+    	    android:id="@+id/button_good_evening"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_good_evening"
+	        android:onClick="playGoodEvening"/>
+    	<Button
+    	    android:id="@+id/button_excuse_me"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_excuse_me"
+	        android:onClick="playExcuseMe"/>
+	   <Button
+    	    android:id="@+id/button_good_day"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_good_day"
+	        android:onClick="playHaveAGoodDay"/>
+	   <Button
+    	    android:id="@+id/button_please"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_please"
+	        android:onClick="playPlease"/>
+	   <Button
+    	    android:id="@+id/button_thank_you"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_thank_you"
+	        android:onClick="playThankYou"/>
+	   <Button
+    	    android:id="@+id/button_im_sorry"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_im_sorry"
+	        android:onClick="playImSorry"/>
+	   <Button
+    	    android:id="@+id/button_thank_patience"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/button_thank_patience"
+	        android:onClick="playThankPatience"/>	   	    
 	<Button
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
