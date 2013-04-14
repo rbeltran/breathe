@@ -1,15 +1,14 @@
 package com.jphat.Breathe;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -17,20 +16,17 @@ import android.widget.Button;
 
 public class MainActivity extends Activity {
 
-	OnAudioFocusChangeListener afChangeListener = null;
-	MediaPlayer mPlayer;
-	
+	private static OnAudioFocusChangeListener afChangeListener = null;
+	private static MediaPlayer mPlayer = null;	
 	List<Button> basicCourtesyButtons;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
 		// Set the volume control buttons to use the music stream which
 		// my app is using
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
-		mPlayer = new MediaPlayer();
 
 		basicCourtesyButtons = new ArrayList<Button>();
 		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_morning));
@@ -47,18 +43,6 @@ public class MainActivity extends Activity {
 			button.setVisibility(View.INVISIBLE);
 		}
 		
-//		afChangeListener = new OnAudioFocusChangeListener() {
-//		    public void onAudioFocusChange(int focusChange) {
-//		        if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ) {
-//		            // Pause playback
-//		        } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-//		            // Resume playback 
-//		        } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-//		            am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
-//		            am.abandonAudioFocus(afChangeListener);
-//		            // Stop playback
-//		        }
-//		}
 	}
 
 	@Override
@@ -68,16 +52,6 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
-	@Override
-	public void onStop() {
-		mPlayer.release();
-		mPlayer = null;
-	}
-	@Override
-	public void onPause() {
-		mPlayer.release();
-		mPlayer = null;
-	}
 	
 	public void toggleBasicCourtesy( View view ) {
 		Button goodMorningButton = (Button)findViewById(R.id.button_good_morning);
@@ -94,23 +68,18 @@ public class MainActivity extends Activity {
 	}
 
 	public void playGoodMorning( View view ) {
-		mPlayer.reset();
-		playSound();
+		getAudioAccess();
 
-		try {
-			AssetFileDescriptor fd = getAssets().openFd("GoodMorning.mp3");
-			mPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			mPlayer.setDataSource(fd.getFileDescriptor());
-			fd.close();
-			mPlayer.prepare();
-			mPlayer.start();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		mPlayer = MediaPlayer.create(getBaseContext(), R.raw.good_morning);
+		mPlayer.start();
+		mPlayer.setOnCompletionListener(  new OnCompletionListener() {
+			public void onCompletion( MediaPlayer player ) {
+				player.release();
+			}
+		});
 	}
 	
-	public void playSound() {
+	public void getAudioAccess() {
 		AudioManager am = (AudioManager) getSystemService( Context.AUDIO_SERVICE );
 		int result = am.requestAudioFocus( 
 				afChangeListener, 
@@ -120,4 +89,24 @@ public class MainActivity extends Activity {
 //			am.unregisterMediaButtonEventReceiver(RemoteControlReceiver);
 		}
 	}
+	
+//	@Override
+//	public void onBackPressed() {
+//		super.onBackPressed();
+//		mPlayer.release();
+//		mPlayer = null;
+//	}
+//	@Override
+//	public void onStop() {
+//		super.onStop();
+//		mPlayer.release();
+//		mPlayer = null;
+//	}
+//	@Override
+//	public void onPause() {
+//		super.onPause();
+//		mPlayer.release();
+//		mPlayer = null;
+//	}
+	
 }
