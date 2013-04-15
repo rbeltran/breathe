@@ -3,12 +3,15 @@ package com.jphat.Breathe;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.jphat.Breathe.util.RawEnum;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -39,9 +42,9 @@ public class MainActivity extends Activity {
 		basicCourtesyButtons.add((Button)findViewById(R.id.button_please));
 		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_day));
 		
-		for(Button button: basicCourtesyButtons ) {
-			button.setVisibility(View.INVISIBLE);
-		}
+//		for(Button button: basicCourtesyButtons ) {
+//			button.setVisibility(View.INVISIBLE);
+//		}
 		
 	}
 
@@ -67,10 +70,10 @@ public class MainActivity extends Activity {
 			
 	}
 
-	public void playGoodMorning( View view ) {
+	public void playFile( View view ) {
 		getAudioAccess();
-
-		mPlayer = MediaPlayer.create(getBaseContext(), R.raw.good_morning);
+		String rawEnum = (String)view.getTag();
+		mPlayer = MediaPlayer.create(getBaseContext(), RawEnum.valueOf(rawEnum).getValue() );
 		mPlayer.start();
 		mPlayer.setOnCompletionListener(  new OnCompletionListener() {
 			public void onCompletion( MediaPlayer player ) {

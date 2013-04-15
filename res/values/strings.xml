@@ -15,6 +15,7 @@
         <string name="button_im_sorry">I\'m sorry</string>
         <string name="button_thank_patience">Thank you for your patience</string>
     <string name="button_introduction">Introduction</string>
+        <string name="button_do_speak_english">Good Afternoon</string>
     <string name="button_assessment">Assessment</string>
     <string name="button_orders_phrases">Orders/Phrases</string>
     <string name="button_ventilator_events">Ventilator Events</string>
