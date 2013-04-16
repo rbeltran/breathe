@@ -94,6 +94,7 @@
 	        android:layout_height="wrap_content"
 	        android:text="@string/button_do_speak_english"
 	        android:tag="RAW_ENUM_DO_SPEAK_ENGLISH" 
+	        android:visibility="gone"
 	        android:onClick="playFile" />	   	    
 	<Button
         android:layout_width="fill_parent"

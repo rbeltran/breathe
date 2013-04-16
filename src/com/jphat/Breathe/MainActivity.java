@@ -62,7 +62,7 @@ public class MainActivity extends Activity {
 
 				for( Button bcButton: basicCourtesyButtons ) {
 			if( buttonsVisible ) {
-				bcButton.setVisibility( View.INVISIBLE );
+				bcButton.setVisibility( View.GONE );
 			} else {
 				bcButton.setVisibility( View.VISIBLE );
 			}
