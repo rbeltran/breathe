@@ -1,155 +1,186 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	xmlns:tools="http://schemas.android.com/tools"
-	android:layout_width="match_parent"
-	android:layout_height="match_parent"
-	tools:context=".MainActivity"
-	android:orientation="vertical" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scroll_view_id"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
 
-    <Button
-        android:id="@+id/button_basic_courtesy"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_basic_courtesy" 
-        android:onClick="toggleBasicCourtesy" />
-    	<Button
-    	    android:id="@+id/button_good_morning"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_good_morning"
-	        android:tag="RAW_ENUM_GOOD_MORNING" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-    	
-    	<Button
-    	    android:id="@+id/button_good_afternoon"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_good_afternoon"
-	        android:tag="RAW_ENUM_GOOD_AFTERNOON" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	    <Button
-    	    android:id="@+id/button_good_evening"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_good_evening"
-	        android:tag="RAW_ENUM_GOOD_EVENING" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-    	<Button
-    	    android:id="@+id/button_excuse_me"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_excuse_me"
-	        android:tag="RAW_ENUM_EXCUSE_ME" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	   <Button
-    	    android:id="@+id/button_good_day"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_good_day"
-	        android:tag="RAW_ENUM_HAVE_A_GOOD_DAY" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	   <Button
-    	    android:id="@+id/button_please"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_please"
-	        android:tag="RAW_ENUM_PLEASE" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	   <Button
-    	    android:id="@+id/button_thank_you"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_thank_you"
-	        android:tag="RAW_ENUM_THANK_YOU"
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	   <Button
-    	    android:id="@+id/button_im_sorry"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_im_sorry"
-	        android:tag="RAW_ENUM_IM_SORRY" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />
-	   <Button
-    	    android:id="@+id/button_thank_patience"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_thank_patience"
-	        android:tag="RAW_ENUM_THANK_PATIENCE" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />	   	    
-	<Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_introduction" />    
-	   <Button
-    	    android:id="@+id/button_do_speak_english"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:text="@string/button_do_speak_english"
-	        android:tag="RAW_ENUM_DO_SPEAK_ENGLISH" 
-	        android:visibility="gone"
-	        android:onClick="playFile" />	   	    
-	<Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_assessment" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_orders_phrases" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_ventilator_events" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_weaning_parameters" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_motivation_cpap" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_arterial_blood" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_extubation" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_incentive_spirometry" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_mdi_nebulizer" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_chest_physiotherapy" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_the_body" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_diseases_conditions" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_time_days" />    
-    <Button
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/button_numbers" />    
-</LinearLayout>
+        android:orientation="vertical"
+        android:scrollbars="vertical"
+        tools:context=".MainActivity" >
+
+        <Button
+            android:id="@+id/button_basic_courtesy"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:onClick="toggleBasicCourtesy"
+            android:text="@string/button_basic_courtesy" />
+
+        <Button
+            android:id="@+id/button_good_morning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_GOOD_MORNING"
+            android:text="@string/button_good_morning"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_good_afternoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_GOOD_AFTERNOON"
+            android:text="@string/button_good_afternoon"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_good_evening"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_GOOD_EVENING"
+            android:text="@string/button_good_evening"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_excuse_me"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_EXCUSE_ME"
+            android:text="@string/button_excuse_me"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_good_day"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_HAVE_A_GOOD_DAY"
+            android:text="@string/button_good_day"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_please"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_PLEASE"
+            android:text="@string/button_please"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_thank_you"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_THANK_YOU"
+            android:text="@string/button_thank_you"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_im_sorry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_IM_SORRY"
+            android:text="@string/button_im_sorry"
+            android:visibility="gone" />
+
+        <Button
+            android:id="@+id/button_thank_patience"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_THANK_PATIENCE"
+            android:text="@string/button_thank_patience"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_introduction" />
+
+        <Button
+            android:id="@+id/button_do_speak_english"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="playFile"
+            android:tag="RAW_ENUM_DO_SPEAK_ENGLISH"
+            android:text="@string/button_do_speak_english"
+            android:visibility="gone" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_assessment" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_orders_phrases" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_ventilator_events" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_weaning_parameters" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_motivation_cpap" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_arterial_blood" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_extubation" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_incentive_spirometry" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_mdi_nebulizer" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_chest_physiotherapy" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_the_body" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_diseases_conditions" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_time_days" />
+
+        <Button
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_numbers" />
+    </LinearLayout>
+</ScrollView>
