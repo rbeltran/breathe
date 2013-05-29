@@ -42,6 +42,7 @@ public class MainActivity extends Activity {
 		basicCourtesyButtons.add((Button)findViewById(R.id.button_please));
 		basicCourtesyButtons.add((Button)findViewById(R.id.button_good_day));
 		
+		List<Button> buttonList = ButtonMapper.createButtonListFromDirectory( getAssets(), getApplicationContext());
 //		for(Button button: basicCourtesyButtons ) {
 //			button.setVisibility(View.INVISIBLE);
 //		}
@@ -93,23 +94,5 @@ public class MainActivity extends Activity {
 		}
 	}
 	
-//	@Override
-//	public void onBackPressed() {
-//		super.onBackPressed();
-//		mPlayer.release();
-//		mPlayer = null;
-//	}
-//	@Override
-//	public void onStop() {
-//		super.onStop();
-//		mPlayer.release();
-//		mPlayer = null;
-//	}
-//	@Override
-//	public void onPause() {
-//		super.onPause();
-//		mPlayer.release();
-//		mPlayer = null;
-//	}
 	
 }
