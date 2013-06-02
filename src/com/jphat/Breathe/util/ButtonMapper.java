@@ -44,7 +44,7 @@ public class ButtonMapper {
 		
 		for( String topName : topLevelNames ) { 
 			topButton = new Button( context );
-			topButton.setText(topName);
+			topButton.setText( cleanName( topName ));
 			topButton.setVisibility(View.VISIBLE);
 			topButton.setId(count++);
 			topButton.setOnClickListener(new TopButtonListener());
@@ -59,7 +59,7 @@ public class ButtonMapper {
 			
 			for( String subName : subNames ) {
 				subButton = new Button( context );
-				subButton.setText( subName );
+				subButton.setText( cleanSubName( subName ));
 				subButton.setId( count++ );
 				subButton.setVisibility( View.GONE );
 				subButton.setOnClickListener(new SubButtonListener( assetManager ));
@@ -77,16 +77,37 @@ public class ButtonMapper {
 		return layout;
 	}
 	
+	public static String cleanName( String name ) {
+		StringBuilder cleaned = new StringBuilder();
+		String[] parts = name.split("_");
+		for( int i = 1; i < parts.length; i++ ) {
+			String part = parts[i];
+			char first = Character.toUpperCase( part.charAt( 0 ));
+			char[] chars = part.toCharArray();
+			chars[0] = first;
+			cleaned.append( chars )
+				.append( " " );
+		}
+		return cleaned.toString();
+	}
+	
+	public static String cleanSubName( String name ) {
+		String almostClean = cleanName( name );
+		int dotIndex = almostClean.indexOf('.');
+		return dotIndex == -1 ? almostClean 
+				: almostClean.substring(0, dotIndex);
+	}
 	
 	public void toggleTopLevelButton( Button topLevel ) {
-		boolean buttonsVisible = topLevel.getVisibility() != View.VISIBLE;
 		List<Button> subButtons = buttonMap.get( topLevel );
-		for( Button sub : subButtons ) {
-			if( buttonsVisible ) {
+		if( subButtons.get(0).getVisibility() == View.VISIBLE ) {
+			for( Button sub : subButtons ) {
 				sub.setVisibility( View.GONE );
-			} else {
+			}			
+		}else {
+			for( Button sub : subButtons ) {
 				sub.setVisibility( View.VISIBLE );
-			}
+			}			
 		}
 			
 	}
