@@ -23,13 +23,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
 		LinearLayout linearLayout = new LinearLayout( this );
 		linearLayout.setLayoutParams(params);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
 		ScrollView scrollView = new ScrollView( this );
-		scrollView.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT,
-		                                             LayoutParams.FILL_PARENT));
+		scrollView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+		                                             LayoutParams.MATCH_PARENT));
 
 		scrollView.addView( linearLayout );
 		
@@ -38,7 +38,7 @@ public class MainActivity extends Activity {
 		setVolumeControlStream(AudioManager.STREAM_MUSIC);
 		ButtonMapper bMapper = new ButtonMapper( linearLayout, new ButtonPlayer(this));
 		try {
-			linearLayout = bMapper.createButtonsFromDirectory( getAssets(), getApplicationContext());
+			bMapper.createButtonsFromDirectory( getAssets(), getApplicationContext());
 			setContentView( scrollView );
 
 		} catch (IOException e) {

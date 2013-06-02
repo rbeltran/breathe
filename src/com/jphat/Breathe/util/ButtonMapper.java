@@ -10,8 +10,8 @@ import java.util.Map;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
+import android.graphics.PorterDuff;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -31,7 +31,7 @@ public class ButtonMapper {
 		this.layout = layout;
 	}
 
-	public LinearLayout createButtonsFromDirectory( AssetManager assetManager, Context context ) throws IOException {
+	public void createButtonsFromDirectory( AssetManager assetManager, Context context ) throws IOException {
 
 		List<Button> buttonList = null;
 		Button topButton = null;
@@ -43,44 +43,51 @@ public class ButtonMapper {
 		String path = null;
 		
 		for( String topName : topLevelNames ) { 
-			topButton = new Button( context );
-			topButton.setText( cleanName( topName ));
+			topButton = createTopLevelButton( context, cleanName( topName ) );
 			topButton.setVisibility(View.VISIBLE);
 			topButton.setId(count++);
 			topButton.setOnClickListener(new TopButtonListener());
-		    topButton.setLayoutParams(new LayoutParams(
-		            ViewGroup.LayoutParams.WRAP_CONTENT,
-		                ViewGroup.LayoutParams.WRAP_CONTENT));
-		    layout.addView(topButton);
 
 			path = BUTTON_DIR+"/"+topName;
 			subNames = assetManager.list( path );
 			buttonList = new ArrayList<Button>();
 			
 			for( String subName : subNames ) {
-				subButton = new Button( context );
-				subButton.setText( cleanSubName( subName ));
+				subButton = createButton( context, cleanSubName( subName ));
 				subButton.setId( count++ );
 				subButton.setVisibility( View.GONE );
 				subButton.setOnClickListener(new SubButtonListener( assetManager ));
-			    subButton.setLayoutParams(new LayoutParams(
-			            ViewGroup.LayoutParams.WRAP_CONTENT,
-			                ViewGroup.LayoutParams.WRAP_CONTENT));
-			    layout.addView(subButton);
-
+			    
 			    buttonToAsset.put( subButton, path+"/"+subName );
 				buttonList.add( subButton );
 			}
 			buttonMap.put( topButton, buttonList );
 		}
 	
-		return layout;
 	}
-	
+	private Button createTopLevelButton( Context context, String text ) {
+		Button button = createButton( context, text );
+//		button.setTextColor(#0000FF);
+		button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+		return button;
+	}
+	private Button createButton( Context context, String text ) {
+		Button butt = new Button( context );
+		butt.setText( text );
+	    butt.setLayoutParams(new LayoutParams(
+	            LinearLayout.LayoutParams.MATCH_PARENT,
+	            LinearLayout.LayoutParams.WRAP_CONTENT));
+//		butt.setTextColor(0xFFFFFF);
+		butt.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
+
+		layout.addView( butt );
+	    return butt;
+	}
 	public static String cleanName( String name ) {
 		StringBuilder cleaned = new StringBuilder();
 		String[] parts = name.split("_");
-		for( int i = 1; i < parts.length; i++ ) {
+		int i = Character.isDigit( parts[0].charAt(0) )  ? 1 : 0;
+		for( ; i < parts.length; i++ ) {
 			String part = parts[i];
 			char first = Character.toUpperCase( part.charAt( 0 ));
 			char[] chars = part.toCharArray();
