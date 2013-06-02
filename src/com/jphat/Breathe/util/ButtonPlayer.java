@@ -1,31 +1,40 @@
 package com.jphat.Breathe.util;
 
-import java.io.File;
+import java.io.FileDescriptor;
+import java.io.IOException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.media.AudioManager;
 import android.media.AudioManager.OnAudioFocusChangeListener;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
-import android.net.Uri;
 
 public class ButtonPlayer {
 	
-	private static MediaPlayer mPlayer = null;	
-	private final Context baseContext;
 	private final AudioManager audioManager;
-	private static final OnAudioFocusChangeListener afChangeListener = new AudioChangeListener();
 
 	public ButtonPlayer( Activity activity ) {
-		this.baseContext = activity.getBaseContext();
 		this.audioManager = ( AudioManager ) activity.getSystemService( Context.AUDIO_SERVICE );
 	}
 	
-//	public void playFile( Uri uri ) {
-	public void playFile( File file ) {
+	public void playFile( AssetFileDescriptor afd ) {
 		getAudioAccess();
-		mPlayer = MediaPlayer.create(baseContext, Uri.fromFile( file ));
+		MediaPlayer mPlayer = new MediaPlayer();
+		try {
+			mPlayer.setDataSource( afd.getFileDescriptor(), 
+					afd.getStartOffset(), 
+					afd.getLength() );
+			afd.close();
+			mPlayer.prepare();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		mPlayer.start();
 		mPlayer.setOnCompletionListener(  new OnCompletionListener() {
 			public void onCompletion( MediaPlayer player ) {

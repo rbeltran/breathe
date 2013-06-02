@@ -1,6 +1,5 @@
 package com.jphat.Breathe.util;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import android.content.Context;
+import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
@@ -63,7 +62,7 @@ public class ButtonMapper {
 				subButton.setText( subName );
 				subButton.setId( count++ );
 				subButton.setVisibility( View.GONE );
-				subButton.setOnClickListener(new SubButtonListener());
+				subButton.setOnClickListener(new SubButtonListener( assetManager ));
 			    subButton.setLayoutParams(new LayoutParams(
 			            ViewGroup.LayoutParams.WRAP_CONTENT,
 			                ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -99,13 +98,23 @@ public class ButtonMapper {
 		}
 	}
 	class SubButtonListener implements View.OnClickListener {
+		private final AssetManager assetMan;
+		
+		public SubButtonListener( AssetManager assetMan ) {
+			this.assetMan = assetMan;
+		}
+		
 		@Override
 		public void onClick(View view) {
-			Uri.Builder uriBuilder = new Uri.Builder();
 			Button clicked = (Button) view;
-			String uriString = buttonToAsset.get( clicked );
-//			uriBuilder.encodedPath(uriString);
-			buttonPlayer.playFile( new File( uriString ));
+			String fileString = buttonToAsset.get( clicked );
+			AssetFileDescriptor afd = null;
+			try {
+				afd = assetMan.openFd( fileString );
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			buttonPlayer.playFile( afd );
 		}
 	}
 }
