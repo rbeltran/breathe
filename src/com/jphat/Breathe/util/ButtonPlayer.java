@@ -1,5 +1,7 @@
 package com.jphat.Breathe.util;
 
+import java.io.File;
+
 import android.app.Activity;
 import android.content.Context;
 import android.media.AudioManager;
@@ -20,9 +22,10 @@ public class ButtonPlayer {
 		this.audioManager = ( AudioManager ) activity.getSystemService( Context.AUDIO_SERVICE );
 	}
 	
-	public void playFile( Uri uri ) {
+//	public void playFile( Uri uri ) {
+	public void playFile( File file ) {
 		getAudioAccess();
-		mPlayer = MediaPlayer.create(baseContext, uri );
+		mPlayer = MediaPlayer.create(baseContext, Uri.fromFile( file ));
 		mPlayer.start();
 		mPlayer.setOnCompletionListener(  new OnCompletionListener() {
 			public void onCompletion( MediaPlayer player ) {

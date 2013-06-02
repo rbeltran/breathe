@@ -1,5 +1,6 @@
 package com.jphat.Breathe.util;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -62,6 +63,7 @@ public class ButtonMapper {
 				subButton.setText( subName );
 				subButton.setId( count++ );
 				subButton.setVisibility( View.GONE );
+				subButton.setOnClickListener(new SubButtonListener());
 			    subButton.setLayoutParams(new LayoutParams(
 			            ViewGroup.LayoutParams.WRAP_CONTENT,
 			                ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -102,8 +104,8 @@ public class ButtonMapper {
 			Uri.Builder uriBuilder = new Uri.Builder();
 			Button clicked = (Button) view;
 			String uriString = buttonToAsset.get( clicked );
-			uriBuilder.encodedPath(uriString);
-			buttonPlayer.playFile( uriBuilder.build());
+//			uriBuilder.encodedPath(uriString);
+			buttonPlayer.playFile( new File( uriString ));
 		}
 	}
 }
