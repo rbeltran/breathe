@@ -10,7 +10,8 @@ import java.util.Map;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
-import android.graphics.PorterDuff;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
@@ -67,22 +68,35 @@ public class ButtonMapper {
 	}
 	private Button createTopLevelButton( Context context, String text ) {
 		Button button = createButton( context, text );
-//		button.setTextColor(#0000FF);
-		button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+		button.setTextColor(Color.WHITE);
+//		button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
+		int[] gColors = { 0xFF3030C0, 0xFF000080 };
+		
+		button.setBackgroundDrawable(createGradient( gColors ));
 		return button;
 	}
 	private Button createButton( Context context, String text ) {
 		Button butt = new Button( context );
 		butt.setText( text );
+		butt.setTextColor(Color.WHITE);
 	    butt.setLayoutParams(new LayoutParams(
 	            LinearLayout.LayoutParams.MATCH_PARENT,
 	            LinearLayout.LayoutParams.WRAP_CONTENT));
-//		butt.setTextColor(0xFFFFFF);
-		butt.getBackground().setColorFilter(0xFF00FF00, PorterDuff.Mode.MULTIPLY);
-
-		layout.addView( butt );
+	    int[] gColors = { 0xFFDBB237, 0xFFB78900 };
+	    butt.setBackgroundDrawable(createGradient( gColors ));
+	    layout.addView( butt );
 	    return butt;
 	}
+	
+	private GradientDrawable createGradient( int[] gradientColors ) {
+		
+	GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, gradientColors );
+	gd.setCornerRadius(0f);
+	gd.setStroke(2, gradientColors[0] );
+	gd.setCornerRadius(3f);
+	return gd;
+	}
+	
 	public static String cleanName( String name ) {
 		StringBuilder cleaned = new StringBuilder();
 		String[] parts = name.split("_");

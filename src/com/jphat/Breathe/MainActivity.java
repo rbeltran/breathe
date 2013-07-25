@@ -23,10 +23,13 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+		LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, 
+				LinearLayout.LayoutParams.WRAP_CONTENT);
 		LinearLayout linearLayout = new LinearLayout( this );
 		linearLayout.setLayoutParams(params);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
+		linearLayout.setBackgroundColor(0xFF000000);
 		ScrollView scrollView = new ScrollView( this );
 		scrollView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
 		                                             LayoutParams.MATCH_PARENT));
