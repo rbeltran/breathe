@@ -70,7 +70,7 @@ public class ButtonMapper {
 		Button button = createButton( context, text );
 		button.setTextColor(Color.WHITE);
 //		button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
-		int[] gColors = { 0xFF3030C0, 0xFF000080 };
+		int[] gColors = { /* 0xFF5656C0, */ 0xFF3030C0, 0xFF000080 };
 		
 		button.setBackgroundDrawable(createGradient( gColors ));
 		return button;
@@ -82,7 +82,7 @@ public class ButtonMapper {
 	    butt.setLayoutParams(new LayoutParams(
 	            LinearLayout.LayoutParams.MATCH_PARENT,
 	            LinearLayout.LayoutParams.WRAP_CONTENT));
-	    int[] gColors = { 0xFFDBB237, 0xFFB78900 };
+	    int[] gColors = { /* 0xFFDBBD63, */ 0xFFDBB237, 0xFFB78900  };
 	    butt.setBackgroundDrawable(createGradient( gColors ));
 	    layout.addView( butt );
 	    return butt;
@@ -90,11 +90,13 @@ public class ButtonMapper {
 	
 	private GradientDrawable createGradient( int[] gradientColors ) {
 		
-	GradientDrawable gd = new GradientDrawable(GradientDrawable.Orientation.TOP_BOTTOM, gradientColors );
-	gd.setCornerRadius(0f);
-	gd.setStroke(2, gradientColors[0] );
-	gd.setCornerRadius(3f);
-	return gd;
+		GradientDrawable gd = new GradientDrawable(
+				GradientDrawable.Orientation.TOP_BOTTOM, 
+				gradientColors );
+		gd.setCornerRadius(5f);
+		gd.setShape(GradientDrawable.RECTANGLE);
+		gd.setStroke(2, gradientColors[0] );
+		return gd;
 	}
 	
 	public static String cleanName( String name ) {
