@@ -1,0 +1,7 @@
+Navy Blue  = 000080
+Gold(compliment) = B78900
+
+lighter blue = 3030C0
+Gold compliment2 = DBB237
+
+
