@@ -13,9 +13,9 @@ import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 
 public class ButtonMapper {
 
@@ -69,7 +69,6 @@ public class ButtonMapper {
 	private Button createTopLevelButton( Context context, String text ) {
 		Button button = createButton( context, text );
 		button.setTextColor(Color.WHITE);
-//		button.getBackground().setColorFilter(0xFFFF0000, PorterDuff.Mode.MULTIPLY);
 		int[] gColors = { /* 0xFF5656C0, */ 0xFF3030C0, 0xFF000080 };
 		
 		button.setBackgroundDrawable(createGradient( gColors ));
@@ -79,9 +78,11 @@ public class ButtonMapper {
 		Button butt = new Button( context );
 		butt.setText( text );
 		butt.setTextColor(Color.WHITE);
-	    butt.setLayoutParams(new LayoutParams(
+		LayoutParams buttonParams = new LayoutParams(
 	            LinearLayout.LayoutParams.MATCH_PARENT,
-	            LinearLayout.LayoutParams.WRAP_CONTENT));
+	            LinearLayout.LayoutParams.WRAP_CONTENT);
+		buttonParams.setMargins(5, 3, 5, 2);
+	    butt.setLayoutParams(buttonParams);
 	    int[] gColors = { /* 0xFFDBBD63, */ 0xFFDBB237, 0xFFB78900  };
 	    butt.setBackgroundDrawable(createGradient( gColors ));
 	    layout.addView( butt );

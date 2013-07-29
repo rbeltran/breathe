@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -29,10 +30,9 @@ public class MainActivity extends Activity {
 		LinearLayout linearLayout = new LinearLayout( this );
 		linearLayout.setLayoutParams(params);
 		linearLayout.setOrientation(LinearLayout.VERTICAL);
-		linearLayout.setBackgroundColor(0xFF000000);
 		ScrollView scrollView = new ScrollView( this );
-		scrollView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-		                                             LayoutParams.MATCH_PARENT));
+		scrollView.setBackgroundColor(Color.DKGRAY);
+
 
 		scrollView.addView( linearLayout );
 		
