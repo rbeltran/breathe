@@ -1,6 +1,11 @@
 package com.jphat.Breathe.util;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -12,26 +17,134 @@ import android.content.res.AssetFileDescriptor;
 import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Environment;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 
 public class ButtonMapper {
-
+	private final static String SERIALIZED_FILE = "buttonInfoMap.ser";
 	private final static String BUTTON_DIR = "button_map";
 	private Map<Button, List<Button>> buttonMap = null;
 	private Map<Button,String> buttonToAsset = null;
 	private final ButtonPlayer buttonPlayer;
-	private final LinearLayout layout;
+	
+	private List<String> topLevelNamesRaw;
+	private Map<String,List<String>> topNamesToSubNameMap;
 	
 	public ButtonMapper( LinearLayout layout, ButtonPlayer bPlayer ) {
 		this.buttonPlayer = bPlayer;
 		buttonMap = new LinkedHashMap<Button,List<Button>>();
 		buttonToAsset = new HashMap<Button,String>();
-		this.layout = layout;
+		topLevelNamesRaw = new ArrayList<String>();
+		topNamesToSubNameMap = new HashMap<String,List<String>>();
 	}
 
+	/**
+	 * 
+	 * Get the buttons in an ordered fashion
+	 * 
+	 * @return
+	 */
+	public List<Button> getAllButtons() {
+		List<Button> allButtons = new ArrayList<Button>();
+		for( Button topButton: buttonMap.keySet() ) {
+			allButtons.add( topButton );
+			allButtons.addAll( buttonMap.get( topButton ));
+		}
+		return allButtons;
+	}
+	
+	public Map<String,List<ButtonInfo>> createRawFileMap( AssetManager assetManager ) throws IOException {
+		String[] topLevelNames = assetManager.list( BUTTON_DIR );
+		String[] subNames;
+		String path;
+		
+		Map<String,List<ButtonInfo>> orderedButtonMap = new LinkedHashMap<String,List<ButtonInfo>>();
+		List<ButtonInfo> subButtonList;
+		
+		ButtonInfo buttonInfo;
+		
+		for( String topName : topLevelNames ) {
+			path = BUTTON_DIR+"/"+topName;
+			subNames = assetManager.list( path );
+			subButtonList = new ArrayList<ButtonInfo>();
+					
+			for( String subName : subNames ) {
+				buttonInfo = new ButtonInfo();
+				buttonInfo.setCleanName(cleanSubName(subName));
+				buttonInfo.setPath(path+"/"+subName);
+				subButtonList.add( buttonInfo );
+			}
+			orderedButtonMap.put( topName, subButtonList );
+		}
+		return orderedButtonMap;
+	}
+	
+	public void createButtons( AssetManager assetManager, Context context ) throws IOException, ClassNotFoundException {
+		Map<String, List<ButtonInfo>> buttonInfoMap;
+		
+		if( buttonMapCached( context ) ) {
+			buttonInfoMap = deserializeButtonInfoMap(context);
+		} else {
+			buttonInfoMap = createRawFileMap( assetManager );
+			serializeButtonInfoMap( buttonInfoMap, context );
+		}
+		createButtonsFromButtonInfoMap( buttonInfoMap, context, assetManager);
+	}
+	
+	private void serializeButtonInfoMap(Map<String,List<ButtonInfo>> buttonInfoMap, Context context ) throws IOException {
+		FileOutputStream fos = context.openFileOutput(SERIALIZED_FILE, Context.MODE_PRIVATE);
+		ObjectOutputStream os = new ObjectOutputStream(fos);
+		os.writeObject(buttonInfoMap);
+		os.close();
+	}
+	
+	private Map<String, List<ButtonInfo>> deserializeButtonInfoMap( Context context ) throws IOException, ClassNotFoundException {
+		FileInputStream fis = context.openFileInput(SERIALIZED_FILE);
+		ObjectInputStream is = new ObjectInputStream(fis);
+		Map<String, List<ButtonInfo>> buttonInfoMap = (Map<String,List<ButtonInfo>>) is.readObject();
+		is.close();
+		return buttonInfoMap;
+	}
+	
+	private boolean buttonMapCached(Context context) {
+		File file = context.getFileStreamPath(SERIALIZED_FILE);
+		return file.exists();
+	}
+	
+	public void createButtonsFromButtonInfoMap( Map<String, List<ButtonInfo>> infoMap, Context context, AssetManager assetManager) {
+		
+		List<Button> buttonList = null;
+
+		Button topButton;
+		Button subButton;
+		int count = 1;
+		
+		
+		for( String topName : infoMap.keySet() ) {
+			topButton = createTopLevelButton( context, cleanName( topName ) );
+			topButton.setVisibility(View.VISIBLE);
+			topButton.setOnClickListener( new TopButtonListener() );
+			topButton.setId(count++);
+			
+			buttonList = new ArrayList<Button>();
+
+			for( ButtonInfo info: infoMap.get(topName)) {
+				subButton = createButton( context, info.getCleanName());
+				subButton.setId( count++ );
+				subButton.setVisibility( View.GONE );
+				subButton.setOnClickListener(new SubButtonListener( assetManager ));
+
+			    buttonToAsset.put( subButton, info.getPath() );
+				buttonList.add( subButton );
+			}
+			buttonMap.put( topButton, buttonList );
+		}
+		
+	}
+	
 	public void createButtonsFromDirectory( AssetManager assetManager, Context context ) throws IOException {
 
 		List<Button> buttonList = null;
@@ -85,7 +198,6 @@ public class ButtonMapper {
 	    butt.setLayoutParams(buttonParams);
 	    int[] gColors = { /* 0xFFDBBD63, */ 0xFFDBB237, 0xFFB78900  };
 	    butt.setBackgroundDrawable(createGradient( gColors ));
-	    layout.addView( butt );
 	    return butt;
 	}
 	
